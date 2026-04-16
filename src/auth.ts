@@ -26,7 +26,7 @@ export const { handlers: { GET, POST }, auth, signOut, signIn } = NextAuth({
     callbacks: {
         // session function is called whenever we are verifying a user in an application
         // in a normal NextAuth project, this is not needed. this version had a bug we needed to address!
-        async session({ session, user }: any) {
+        async session({ session, user }) {
             if (session && user) {
                 session.user.id = user.id;
             }
