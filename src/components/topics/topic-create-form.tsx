@@ -11,13 +11,14 @@ import {
 import * as actions from '@/actions';
 // useActionState is a hook. Hooks can only be used in client components.
 import { useActionState, startTransition } from "react";
+import FormButton from '@/components/common/form-button';
 
 export default function TopicCreateForm() {
     // when we call useActionState, we get an array of two elements: the first is our formState and the second is a wrapped up version of our server action
     // the first argument to useActionState is the action that we want to call.
     // the second argument is
 
-    const [formState, action] = useActionState(actions.createTopic, {
+    const [formState, action, isPending] = useActionState(actions.createTopic, {
         errors: {}
     });
 
@@ -54,7 +55,7 @@ export default function TopicCreateForm() {
 
                         {formState.errors._form ? <div className="p-2 bg-red-200 border border-red-400 rounded">{formState.errors._form?.join(', ')}</div> : null}
 
-                        <Button type="submit">Submit</Button>
+                        <FormButton isLoading={isPending}>Save</FormButton>
                     </div>
                 </form>
             </PopoverContent>
