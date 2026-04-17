@@ -2,6 +2,12 @@
 
 import { z } from 'zod';
 import { auth } from '@/auth';
+import type { Topic } from '@prisma/client';
+import { redirect } from 'next/navigation';
+import { db } from '@/db';
+import paths from '@/paths';
+import { revalidatePath } from 'next/cache';
+
 
 const createTopicSchema = z.object({
     name: z.string().min(3).regex(/^[a-z-]+$/, { message: "Must be lowercase letters or dashes without spaces"}),
@@ -43,7 +49,31 @@ export async function createTopic(
             };
         }
 
-        return {
-            errors: {}
-        };
+        let topic: Topic;
+        try {
+            topic = await db.topic.create({
+                data: {
+                    slug: result.data.name,
+                    description: result.data.description
+                }
+            })
+        } catch (err:unknown) {
+            if (err instanceof Error) {
+                return {
+                    errors: {
+                        _form: [err.message]
+                    }
+                }
+            } else {
+                return {
+                    errors: {
+                        _form: ['Something went wrong']
+                    }
+                }
+            }
+        }
+
+        // revalidatePath must be placed before redirect because redirect will throw an error by default and if revalidatePath were placed afterward, the error would prevent revalidation
+        revalidatePath('/')
+        redirect(paths.topicShow(topic.slug));
 }
