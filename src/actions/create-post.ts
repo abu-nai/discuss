@@ -36,6 +36,15 @@ export async function createPost(
         }
     }
 
+    const session = await auth();
+    if (!session || !session.user) {
+        return {
+            errors: {
+                _form: ['You must be signed in to do this!']
+            }
+        };
+    }
+
     return {
         errors: {}
     }
