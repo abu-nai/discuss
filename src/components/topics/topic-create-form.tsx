@@ -16,7 +16,7 @@ import FormButton from '@/components/common/form-button';
 export default function TopicCreateForm() {
     // when we call useActionState, we get an array of two elements: the first is our formState and the second is a wrapped up version of our server action
     // the first argument to useActionState is the action that we want to call.
-    // the second argument is
+    // ? the second argument is the initial state of our errors object. when we first render our application, there will be no errors so we initialise our state to an empty object.
 
     const [formState, action, isPending] = useActionState(actions.createTopic, {
         errors: {}
@@ -44,12 +44,16 @@ export default function TopicCreateForm() {
                         {/* Reminder that the name properties modify how we access the form data inside of the form data object in our server action.  */}
                         <Input 
                             name="name" 
-                            label="Name" labelPlacement="outside"
+                            label="Name" 
+                            labelPlacement="outside"
                             placeholder="name"
                             isInvalid={!!formState.errors.name}
                             errorMessage={formState.errors.name?.join(', ')} />
                         <Textarea 
-                            name="description" label="Description" labelPlacement="outside" placeholder="Describe your topic"
+                            name="description" 
+                            label="Description" 
+                            labelPlacement="outside" 
+                            placeholder="Describe your topic"
                             isInvalid={!!formState.errors.description}
                             errorMessage={formState.errors.description?.join(', ')} />
 
