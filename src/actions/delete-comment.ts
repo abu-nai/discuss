@@ -40,20 +40,8 @@ export async function deleteComment({ commentId, postId, slug }: DeleteCommentPr
                 id: commentId
             }
         });
-    } catch (err: unknown) {
-        if (err instanceof Error) {
-            return {
-                errors: {
-                    _form: [err.message]
-                }
-            }
-        } else {
-            return {
-                errors: {
-                    _form: ['Something went wrong!']
-                }
-            }
-        }
+    } catch {
+        throw new Error('Something went wrong!')
     }
 
 // Retrieve topic.slug for revalidation and redirection
