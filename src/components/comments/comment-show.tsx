@@ -2,6 +2,7 @@ import Image from "next/image";
 import CommentCreateForm from "@/components/comments/comment-create-form";
 import { fetchCommentsByPostId } from '@/db/queries/comments';
 import { Button } from "@nextui-org/react";
+import * as actions from '@/actions';
 
 interface CommentShowProps {
   commentId: string;
@@ -41,9 +42,14 @@ export default async function CommentShow({ commentId, postId }: CommentShowProp
 
           <div className="flex">
             <CommentCreateForm postId={comment.postId} parentId={comment.id} />
-            <Button size="sm" variant="bordered">
-              Delete
-            </Button>
+
+            {/* Create separate CommentDeleteForm component to import and display here. */}
+            <form action={actions.deleteComment.bind(null, { commentId, postId, slug })}>
+              <Button size="sm" variant="bordered">
+                Delete
+              </Button>
+            </form>
+
           </div>
         </div>
       </div>
