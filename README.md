@@ -1,3 +1,7 @@
+This is a project from Stephen Grider's NextJS: The Complete Developer's Guide course on Udemy. I've used it as a stepping stone to work on a small personal project and hope to customise this to my wants. :')
+
+------------
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
