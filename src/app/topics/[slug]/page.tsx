@@ -1,6 +1,7 @@
 import PostCreateForm from '@/components/posts/post-create-form';
 import PostList from '@/components/posts/post-list';
 import { fetchPostsByTopicSlug } from '@/db/queries/posts';
+import DeleteTopicForm from '@/components/topics/topic-delete-form';
 
 interface TopicShowPageProps {
     params: Promise<{
@@ -21,8 +22,9 @@ export default async function TopicShowPage({ params }: TopicShowPageProps) {
             <PostList fetchData={() => fetchPostsByTopicSlug(slug)} />
         </div>
 
-        <div>
+        <div className="flex gap-2">
             <PostCreateForm slug={slug}/>
+            <DeleteTopicForm slug={slug} />
         </div>
     </div>
   )

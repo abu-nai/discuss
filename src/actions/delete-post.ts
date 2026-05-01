@@ -1,6 +1,5 @@
 'use server';
 
-// Imports
 import { auth } from '@/auth';
 import { db } from '@/db';
 import paths from '@/paths';
