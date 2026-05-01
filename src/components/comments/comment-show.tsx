@@ -1,15 +1,15 @@
 import Image from "next/image";
 import CommentCreateForm from "@/components/comments/comment-create-form";
+import DeleteCommentForm from "./comment-delete-form";
 import { fetchCommentsByPostId } from '@/db/queries/comments';
-import { Button } from "@nextui-org/react";
-import * as actions from '@/actions';
 
 interface CommentShowProps {
   commentId: string;
-  postId: string
+  postId: string;
+  slug: string
 }
 
-export default async function CommentShow({ commentId, postId }: CommentShowProps) {
+export default async function CommentShow({ commentId, postId, slug }: CommentShowProps) {
   const comments = await fetchCommentsByPostId(postId);
   const comment = comments.find((c) => c.id === commentId);
 
@@ -20,7 +20,7 @@ export default async function CommentShow({ commentId, postId }: CommentShowProp
   const children = comments.filter((c) => c.parentId === commentId);
   const renderedChildren = children.map((child) => {
     return (
-      <CommentShow key={child.id} commentId={child.id} postId={postId} />
+      <CommentShow key={child.id} commentId={child.id} postId={postId} slug={slug} />
     );
   });
 
@@ -43,12 +43,7 @@ export default async function CommentShow({ commentId, postId }: CommentShowProp
           <div className="flex">
             <CommentCreateForm postId={comment.postId} parentId={comment.id} />
 
-            {/* Create separate CommentDeleteForm component to import and display here. */}
-            <form action={actions.deleteComment.bind(null, { commentId, postId, slug })}>
-              <Button size="sm" variant="bordered">
-                Delete
-              </Button>
-            </form>
+            <DeleteCommentForm commentId={commentId} postId={comment.postId} slug={slug} />
 
           </div>
         </div>
