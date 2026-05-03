@@ -9,7 +9,7 @@ interface PostShowProps {
 
 export default async function PostShow({ postId, slug }: PostShowProps) {
   // manually implement loading pause for testing
-  await new Promise(resolve => setTimeout(resolve, 2500));
+  await new Promise(resolve => setTimeout(resolve, 1500));
 
   const post = await db.post.findFirst({
     where: { id: postId }
@@ -21,7 +21,7 @@ export default async function PostShow({ postId, slug }: PostShowProps) {
 
   return (
     <div className="m-4">
-      <h1 className="text-2xl font-bold my-2">{post.title}</h1>
+      <h1 className="text-2xl font-bold my-2">{post.title} ⋆˚✿˖°</h1>
       <p className="p-4 border rounded flex justify-between">{post.content} <DeletePostForm postId={postId} slug={slug} /></p>
     </div>
   );

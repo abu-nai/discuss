@@ -14,7 +14,10 @@ export default function Header() {
     return (
         <Navbar className="shadow mb-6">
             <NavbarBrand>
-                <Link href="/" className="font-bold">Community and Conversation</Link>
+                <div>
+                    <Link href="/" className="font-bold">From Me, To You <span className="text-pink-300">જ⁀➴</span></Link>
+                    <p className="text-sm">a place to foster community and conversation</p>
+                </div>
             </NavbarBrand>
             <NavbarContent justify="center">
                 <NavbarItem>
@@ -25,7 +28,7 @@ export default function Header() {
             </NavbarContent>
 
             <NavbarContent justify="end">
-                <HeaderAuth />
+                    <span className="text-gray-800">⤷ ˗ˏˋ</span><HeaderAuth /><span className="text-gray-800">ˎˊ˗</span>
             </NavbarContent>
         </Navbar>
     )
