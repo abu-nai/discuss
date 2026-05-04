@@ -15,7 +15,7 @@ interface DeleteTopicFormProps {
 }
 
 export default function DeleteTopicForm({ slug }: DeleteTopicFormProps ) {
-    const [formState, action, isPending] = useActionState(actions.deleteTopic.bind(null, { slug }), { errors: {} });
+    const [_formState, action, isPending] = useActionState(actions.deleteTopic.bind(null, { slug }), { errors: {} });
 
     return (
         <Popover placement="left">
