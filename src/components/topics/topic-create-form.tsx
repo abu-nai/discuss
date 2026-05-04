@@ -2,12 +2,12 @@
 
 import {
     Input,
-    Button,
     Textarea,
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
+import PersonalButton from '../common/button';
 import * as actions from '@/actions';
 // useActionState is a hook. Hooks can only be used in client components.
 import { useActionState, startTransition } from "react";
@@ -33,9 +33,9 @@ export default function TopicCreateForm() {
     return (
         <Popover placement="left">
             <PopoverTrigger>
-                <Button color="primary">
+                <PersonalButton className="bg-violet-500/60 rounded-xl">
                     Create a Topic
-                </Button>
+                </PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
                 <form onSubmit={handleSubmit} noValidate>

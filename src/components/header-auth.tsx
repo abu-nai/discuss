@@ -2,12 +2,12 @@
 
 import {
     NavbarItem,
-    Button,
     Avatar,
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
+import PersonalButton from '@/components/common/button';
 import { useSession } from 'next-auth/react';
 import * as actions from '@/actions';
 
@@ -27,7 +27,7 @@ export default function HeaderAuth() {
             <PopoverContent>
                 <div className="p-4">
                     <form action={actions.signOut}>
-                        <Button type="submit">Sign Out</Button>
+                        <PersonalButton className="bg-slate-500/60">Sign Out</PersonalButton>
                     </form>
                 </div>
             </PopoverContent>
@@ -37,12 +37,12 @@ export default function HeaderAuth() {
             <>
                 <NavbarItem>
                     <form action={actions.signIn}>
-                        <Button type="submit" color="secondary" variant="bordered">Sign In</Button>    
+                        <PersonalButton>Sign In</PersonalButton>   
                     </form>
                 </NavbarItem>
                 <NavbarItem>
                     <form action={actions.signIn}>
-                        <Button type="submit" color="primary" variant="flat">Sign Up</Button>
+                        <PersonalButton className="bg-white text-rose-500/60 outline-dotted">Sign Up</PersonalButton>
                     </form>
                 </NavbarItem>
             </>
