@@ -1,5 +1,7 @@
 'use client';
 
+// NEED TO CHECK THE CREATE TOPIC BUTTON!! //
+
 import {
     Input,
     Textarea,
@@ -33,7 +35,7 @@ export default function TopicCreateForm() {
     return (
         <Popover placement="left">
             <PopoverTrigger>
-                <PersonalButton className="bg-violet-500/60 rounded-xl">
+                <PersonalButton className="bg-indigo-400/80 rounded-full">
                     Create a Topic
                 </PersonalButton>
             </PopoverTrigger>
@@ -46,7 +48,7 @@ export default function TopicCreateForm() {
                             name="name" 
                             label="Name" 
                             labelPlacement="outside"
-                            placeholder="name"
+                            placeholder="Choose a topic name"
                             isInvalid={!!formState.errors.name}
                             errorMessage={formState.errors.name?.join(', ')} />
                         <Textarea 

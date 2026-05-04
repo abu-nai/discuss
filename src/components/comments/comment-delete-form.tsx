@@ -2,13 +2,13 @@
 
 import { useActionState } from 'react';
 import {
-    Button,
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
 import * as actions from '@/actions';
 import FormButton from '@/components/common/form-button';
+import PersonalButton from '../common/button';
 
 interface DeleteCommentFormProps {
     commentId: string,
@@ -22,9 +22,9 @@ export default function DeleteCommentForm({ commentId, postId, slug }: DeleteCom
     return (
         <Popover placement="right">
             <PopoverTrigger>
-                <Button color="danger" size="sm" variant="bordered">
+                <PersonalButton className="text-xs bg-rose-600/60">
                     Delete
-                </Button>
+                </PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
                 <form action={action}>

@@ -2,13 +2,13 @@
 
 import { useActionState } from 'react';
 import {
-    Button,
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
 import * as actions from '@/actions';
 import FormButton from '@/components/common/form-button';
+import PersonalButton from '../common/button';
 
 interface DeleteTopicFormProps {
     slug: string
@@ -20,7 +20,7 @@ export default function DeleteTopicForm({ slug }: DeleteTopicFormProps ) {
     return (
         <Popover placement="left">
             <PopoverTrigger>
-                <Button color="danger" variant="bordered">✕</Button>
+                <PersonalButton className="text-xs bg-rose-600/60 size-10">✕</PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
                 <form action={action}>
