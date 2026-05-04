@@ -16,7 +16,7 @@ interface DeletePostFormProps {
 }
 
 export default function DeletePostForm({ postId, slug }: DeletePostFormProps ) {
-    const [formState, action, isPending] = useActionState(actions.deletePost.bind(null, { postId, slug }), { errors: {} });
+    const [_formState, action, isPending] = useActionState(actions.deletePost.bind(null, { postId, slug }), { errors: {} });
 
     return (
         <Popover placement="left">

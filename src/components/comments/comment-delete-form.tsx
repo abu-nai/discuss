@@ -1,6 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import {
     Popover,
     PopoverTrigger,
@@ -17,7 +18,7 @@ interface DeleteCommentFormProps {
 }
 
 export default function DeleteCommentForm({ commentId, postId, slug }: DeleteCommentFormProps ) {
-    const [formState, action, isPending] = useActionState(actions.deleteComment.bind(null, { commentId, postId, slug }), { errors: {} })
+    const [_formState, action, isPending] = useActionState(actions.deleteComment.bind(null, { commentId, postId, slug }), { errors: {} })
 
     return (
         <Popover placement="right">
