@@ -3,7 +3,6 @@
 import { useActionState } from 'react';
 import {
     Input,
-    Button,
     Textarea,
     Popover,
     PopoverTrigger,
@@ -11,6 +10,7 @@ import {
 } from '@nextui-org/react';
 import * as actions from '@/actions';
 import FormButton from '@/components/common/form-button';
+import PersonalButton from '../common/button';
 
 interface PostCreateFormProps {
     slug: string;
@@ -26,9 +26,9 @@ export default function PostCreateForm({ slug }: PostCreateFormProps) {
     return (
         <Popover placement="left">
             <PopoverTrigger>
-                <Button color="primary">
-                    Create a Post
-                </Button>
+                <PersonalButton className="bg-violet-500/60 rounded-full h-10">
+                    Create Post
+                </PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
                 <form action={action}>

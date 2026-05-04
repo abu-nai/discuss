@@ -12,7 +12,7 @@ export default function FormButton({children, isLoading}: FormButtonProps) {
     // const { pending } = useFormStatus();
 
     return (
-        <Button type="submit" isLoading={isLoading}>
+        <Button className="bg-indigo-200/30 outline-dashed outline-indigo-300/70" type="submit" isLoading={isLoading}>
             {children}
         </Button>
     )
