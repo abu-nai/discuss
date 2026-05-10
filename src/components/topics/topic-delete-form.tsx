@@ -1,13 +1,12 @@
 'use client';
 
-import { useActionState } from 'react';
 import {
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
 import * as actions from '@/actions';
-import FormButton from '@/components/common/form-button';
+import DeleteButton from '@/components/common/delete-button';
 import PersonalButton from '../common/button';
 
 interface DeleteTopicFormProps {
@@ -15,7 +14,6 @@ interface DeleteTopicFormProps {
 }
 
 export default function DeleteTopicForm({ slug }: DeleteTopicFormProps ) {
-    const [_formState, action, isPending] = useActionState(actions.deleteTopic.bind(null, { slug }), { errors: {} });
 
     return (
         <Popover placement="left">
@@ -23,13 +21,13 @@ export default function DeleteTopicForm({ slug }: DeleteTopicFormProps ) {
                 <PersonalButton className="text-xs bg-rose-600/60 size-10">✕</PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
-                <form action={action}>
+                <form action={actions.deleteTopic.bind(null, { slug })}>
                     <div className="flex flex-col gap-4 p-4 w-90">
                         <p className="text-sm font-medium text-center">Are you sure you want to delete this topic?</p>
                         <p className="text-sm font-medium text-center">This action can not be undone!</p>
-                        <FormButton isLoading={isPending}>
+                        <DeleteButton>
                             Delete!
-                        </FormButton>
+                        </DeleteButton>
                     </div>
                 </form>
             </PopoverContent>
