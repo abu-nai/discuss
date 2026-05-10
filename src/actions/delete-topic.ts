@@ -1,9 +1,9 @@
+// ERROR: schema.prisma has Post relation set to RESTRICT so if there are posts under the topic, the topic can not be deleted...
+
 'use server';
 
 import { auth } from '@/auth';
 import { db } from '@/db';
-import paths from '@/paths';
-import { notFound } from 'next/navigation';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
@@ -18,28 +18,15 @@ export async function deleteTopic({ slug }: DeleteTopicProps) {
         throw new Error('You must be signed in to delete a topic')
     };
 
-    const topic = await db.topic.findFirst({
-        where: { slug }
-    })
-
-    if (!topic) {
-        notFound();
-    }
-
     // Try to delete or throw error
-    try {
-        await db.topic.delete({
-            where: { slug }
-        })
-    } catch {
-        notFound();
-    }
+    await db.topic.delete({
+        where: { slug }
+    });
 
     // Revalidate topicShow path
-    revalidatePath(paths.topicShow(topic.slug));
+    revalidatePath('/');
 
     // Redirect to homepage
     redirect('/');
-
 }
 
