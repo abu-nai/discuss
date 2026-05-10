@@ -1,13 +1,12 @@
 'use client';
 
-import { useActionState } from 'react';
 import {
     Popover,
     PopoverTrigger,
     PopoverContent
 } from '@nextui-org/react';
 import * as actions from '@/actions';
-import FormButton from '@/components/common/form-button';
+import DeleteButton from '@/components/common/delete-button';
 import PersonalButton from '../common/button';
 
 interface DeleteCommentFormProps {
@@ -17,7 +16,6 @@ interface DeleteCommentFormProps {
 }
 
 export default function DeleteCommentForm({ commentId, postId, slug }: DeleteCommentFormProps ) {
-    const [_formState, action, isPending] = useActionState(actions.deleteComment.bind(null, { commentId, postId, slug }), { errors: {} })
 
     return (
         <Popover placement="right">
@@ -27,13 +25,13 @@ export default function DeleteCommentForm({ commentId, postId, slug }: DeleteCom
                 </PersonalButton>
             </PopoverTrigger>
             <PopoverContent>
-                <form action={action}>
+                <form action={actions.deleteComment.bind(null, { commentId, postId, slug })}>
                     <div className="flex flex-col gap-4 p-4 w-90">
                         <p className="text-sm font-medium text-center">Are you sure you want to delete this comment?</p>
                         <p className="text-sm font-medium text-center">This action can not be undone!</p>
-                        <FormButton isLoading={isPending}>
+                        <DeleteButton>
                             Yes, Delete!
-                        </FormButton>
+                        </DeleteButton>
                     </div>
             </form>
             </PopoverContent>
