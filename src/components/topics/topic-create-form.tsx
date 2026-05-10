@@ -1,7 +1,5 @@
 'use client';
 
-// NEED TO CHECK THE CREATE TOPIC BUTTON!! //
-
 import {
     Input,
     Textarea,
