@@ -14,7 +14,7 @@ import { useActionState, startTransition } from "react";
 import FormButton from '@/components/common/form-button';
 
 export default function TopicCreateForm() {
-    // when we call useActionState, we get an array of two elements: the first is our formState and the second is a wrapped up version of our server action
+    // when we call useActionState, we get an array of three elements: the first is our formState, the second is a wrapped up version of our server action, and the third is the pending state
     // the first argument to useActionState is the action that we want to call.
     // ? the second argument is the initial state of our errors object. when we first render our application, there will be no errors so we initialise our state to an empty object.
 
