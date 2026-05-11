@@ -38,6 +38,9 @@ export default function CommentCreateForm({
     <form action={action} ref={ref}>
       <div className="space-y-2 px-1">
         <Textarea
+          fullWidth
+          rows={6}
+          style={{resize: "vertical"}}
           name="content"
           label="Reply"
           placeholder="Enter your comment"
