@@ -23,15 +23,15 @@ export default function CustomCursor() {
 
     return (
         <Image
-            src="/cursor.gif"
+            src="/second-cursor.gif"
             alt="cursor"
-            width={50}
-            height={50}
+            width={40}
+            height={40}
             style={{
                 position: 'fixed',
                 left: position.x,
                 top: position.y,
-                transform: 'translate(-50%, -50%)',
+                // transform: 'translate(-50%, -50%)',
                 pointerEvents: 'none',
                 zIndex: 9999,
             }}
