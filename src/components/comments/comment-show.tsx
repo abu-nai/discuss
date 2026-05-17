@@ -40,11 +40,9 @@ export default async function CommentShow({ commentId, postId, slug }: CommentSh
           </p>
           <p className="text-gray-900">{comment.content}</p>
 
-          <div className="flex">
-            <CommentCreateForm postId={comment.postId} parentId={comment.id} />
-
-            <DeleteCommentForm commentId={commentId} postId={comment.postId} slug={slug} />
-
+          <div className="flex items-start gap-x-2">
+              <CommentCreateForm postId={comment.postId} parentId={comment.id} />
+              <DeleteCommentForm commentId={commentId} postId={comment.postId} slug={slug} />
           </div>
         </div>
       </div>
