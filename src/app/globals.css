@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *:hover, *:focus, *:active {
+html, body, *, *::before, *::after {
     cursor: none !important;
 }
