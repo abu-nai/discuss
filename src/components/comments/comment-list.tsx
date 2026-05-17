@@ -6,7 +6,6 @@ interface CommentListProps {
   slug: string
 }
 
-// TODO: Get a list of comments from somewhere
 export default async function CommentList({ postId, slug }: CommentListProps) {
   const comments = await fetchCommentsByPostId(postId);
 
