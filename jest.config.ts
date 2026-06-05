@@ -12,7 +12,23 @@ const config: Config = {
   testEnvironment: 'jsdom',
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(next-auth|@auth/core|oauth4webapi|@panva|next)/)'
+  ],
 }
- 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config)
+
+// // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+// export default createJestConfig(config)
+
+async function jestConfig() {
+  const nextJestConfig = await createJestConfig(config)();
+  return {
+    ...nextJestConfig,
+    moduleNameMapper: {
+      '^@/(.*)$': '<rootDir>/src/$1',
+      ...nextJestConfig.moduleNameMapper,
+    },
+  };
+}
+
+export default jestConfig;
