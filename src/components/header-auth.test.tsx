@@ -27,6 +27,23 @@ function renderComponent() {
     );
 }
 
+function authenticatedData() {
+    return (
+        (useSession as jest.Mock).mockReturnValue(
+            {
+                status: 'authenticated',
+                data: {
+                    user: 
+                        {
+                            name: 'Fern', 
+                            image: 'https://imgexample.com/avatar.png'
+                        }
+                },
+            }
+        )
+    )
+}
+
 describe('when session is not authenticated', () => {
 
     test('sign in and sign up buttons are visible', () => {
@@ -52,19 +69,7 @@ describe('when session is not authenticated', () => {
 
 describe('when session is authenticated', () => {
     test('sign in and sign up buttons are not visible', () => {
-        (useSession as jest.Mock).mockReturnValue(
-            {
-                status: 'authenticated',
-                data: {
-                    user: 
-                        {
-                            name: 'Fern', 
-                            image: 'https://imgexample.com/avatar.png'
-                        }
-                },
-            }
-        );
-
+        authenticatedData();
         renderComponent();
 
         const signInButton = screen.queryByRole('button', {
@@ -83,6 +88,12 @@ describe('when session is authenticated', () => {
     });
 
     test('sign out button is rendered', () => {
+        authenticatedData();
 
+        const signOutButton = screen.getByRole('button', {
+            name: /sign out/i
+        });
+
+        expect(signOutButton).toBeInTheDocument();
     });
 });
