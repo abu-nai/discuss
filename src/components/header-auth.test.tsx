@@ -1,9 +1,3 @@
-// jest.mock('@/actions', () => ({}));
-
-// test('placeholder', () => {
-//   expect(true).toBe(true);
-// });
-
 import { render, screen } from '@testing-library/react';
 import HeaderAuth from './header-auth';
 import { useSession } from 'next-auth/react';
@@ -25,6 +19,14 @@ jest.mock('@/actions', () => ({
   search: jest.fn(),
 }));
 
+function renderComponent() {
+    render(
+    <Navbar>
+        <HeaderAuth />
+    </Navbar>
+    );
+}
+
 describe('when session is not authenticated', () => {
 
     test('sign in and sign up buttons are visible', () => {
@@ -34,16 +36,53 @@ describe('when session is not authenticated', () => {
                 data: null 
             });
 
-        render(
-            <Navbar>
-                <HeaderAuth />
-            </Navbar>
-        );
+        renderComponent();
 
         const signInButton = screen.getByRole('button', {
             name: /sign in/i
         });
+        const signUpButton = screen.getByRole('button', {
+            name: /sign up/i
+        });
 
         expect(signInButton).toBeInTheDocument();
+        expect(signUpButton).toBeInTheDocument();
+    });
+});
+
+describe('when session is authenticated', () => {
+    test('sign in and sign up buttons are not visible', () => {
+        (useSession as jest.Mock).mockReturnValue(
+            {
+                status: 'authenticated',
+                data: {
+                    user: 
+                        {
+                            name: 'Fern', 
+                            image: 'https://imgexample.com/avatar.png'
+                        }
+                },
+            }
+        );
+
+        renderComponent();
+
+        const signInButton = screen.queryByRole('button', {
+            name: /sign in/i
+        });
+        const signUpButton = screen.queryByRole('button', {
+            name: /sign up/i
+        });
+
+        expect(signInButton).not.toBeInTheDocument();
+        expect(signUpButton).not.toBeInTheDocument();
+    });
+
+    test('user avatar is rendered', () => {
+
+    });
+
+    test('sign out button is rendered', () => {
+
     });
 });
