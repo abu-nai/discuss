@@ -19,6 +19,15 @@ jest.mock('@/actions', () => ({
   search: jest.fn(),
 }));
 
+jest.mock('@nextui-org/react', () => ({
+  ...jest.requireActual('@nextui-org/react'),
+  Popover: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  PopoverTrigger: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  PopoverContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  Navbar: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+  NavbarItem: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
 function renderComponent() {
     render(
     <Navbar>
@@ -83,17 +92,19 @@ describe('when session is authenticated', () => {
         expect(signUpButton).not.toBeInTheDocument();
     });
 
-    test('user avatar is rendered', () => {
-
-    });
-
-    test('sign out button is rendered', () => {
+    test('sign out button is rendered', async () => {
         authenticatedData();
+        renderComponent();
 
         const signOutButton = screen.getByRole('button', {
             name: /sign out/i
         });
 
         expect(signOutButton).toBeInTheDocument();
+    });
+
+
+    test('user avatar is rendered', () => {
+
     });
 });
