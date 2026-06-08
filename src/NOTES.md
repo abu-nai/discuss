@@ -6,5 +6,5 @@
     [ x ] Render the sign in and sign up buttons
   - If a session/user IS authenticated:
     [ x ] Do not show the sign in and sign up buttons
-    [ ] Render the user's avatar
-    [ ] Render sign out button
+    [ x ] Render the user's avatar
+    [ x ] Render sign out button
