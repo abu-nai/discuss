@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import HeaderAuth from './header-auth';
 import { useSession } from 'next-auth/react';
-import { Navbar } from '@nextui-org/react';
 
 jest.mock('next-auth/react', () => ({
     useSession: jest.fn(),
@@ -27,14 +26,6 @@ jest.mock('@nextui-org/react', () => ({
   Navbar: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   NavbarItem: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
-
-function renderComponent() {
-    render(
-    <Navbar>
-        <HeaderAuth />
-    </Navbar>
-    );
-}
 
 function authenticatedData() {
     return (
@@ -62,7 +53,7 @@ describe('when session is not authenticated', () => {
                 data: null 
             });
 
-        renderComponent();
+        render(<HeaderAuth />);
 
         const signInButton = screen.getByRole('button', {
             name: /sign in/i
@@ -79,7 +70,7 @@ describe('when session is not authenticated', () => {
 describe('when session is authenticated', () => {
     test('sign in and sign up buttons are not visible', () => {
         authenticatedData();
-        renderComponent();
+        render(<HeaderAuth />);
 
         const signInButton = screen.queryByRole('button', {
             name: /sign in/i
@@ -92,19 +83,23 @@ describe('when session is authenticated', () => {
         expect(signUpButton).not.toBeInTheDocument();
     });
 
+    test('user avatar is rendered', () => {
+        authenticatedData();
+        render(<HeaderAuth />);
+
+        const avatar = screen.getByRole('img', { name: /avatar/i });
+        
+        expect(avatar).toBeInTheDocument();
+    });
+
     test('sign out button is rendered', async () => {
         authenticatedData();
-        renderComponent();
+        render(<HeaderAuth />);
 
         const signOutButton = screen.getByRole('button', {
             name: /sign out/i
         });
 
         expect(signOutButton).toBeInTheDocument();
-    });
-
-
-    test('user avatar is rendered', () => {
-
     });
 });
