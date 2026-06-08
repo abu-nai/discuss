@@ -7,24 +7,24 @@ jest.mock('next-auth/react', () => ({
 }));
 
 jest.mock('@/actions', () => ({
-  signIn: jest.fn(),
-  signOut: jest.fn(),
-  createComment: jest.fn(),
-  deleteComment: jest.fn(),
-  createTopic: jest.fn(),
-  deleteTopic: jest.fn(),
-  createPost: jest.fn(),
-  deletePost: jest.fn(),
-  search: jest.fn(),
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+    createComment: jest.fn(),
+    deleteComment: jest.fn(),
+    createTopic: jest.fn(),
+    deleteTopic: jest.fn(),
+    createPost: jest.fn(),
+    deletePost: jest.fn(),
+    search: jest.fn(),
 }));
 
 jest.mock('@nextui-org/react', () => ({
-  ...jest.requireActual('@nextui-org/react'),
-  Popover: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-  PopoverTrigger: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-  PopoverContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-  Navbar: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-  NavbarItem: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+    ...jest.requireActual('@nextui-org/react'),
+    Popover: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+    PopoverTrigger: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+    PopoverContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+    Navbar: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+    NavbarItem: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
 
 function authenticatedData() {
@@ -43,6 +43,20 @@ function authenticatedData() {
         )
     )
 }
+
+describe('when session status is loading', () => {
+    test('nothing should be displayed', () => {
+        (useSession as jest.Mock).mockReturnValue(
+            { 
+                status: 'loading',
+                data: null 
+            });
+
+        const { container } = render(<HeaderAuth />);
+
+        expect(container).toBeEmptyDOMElement();
+    });
+});
 
 describe('when session is not authenticated', () => {
 
