@@ -1,4 +1,6 @@
-This is a project from Stephen Grider's NextJS: The Complete Developer's Guide course on Udemy. I've used it as a stepping stone to work on a small personal project and hope to customise this to my wants. :')
+This was originally a project from Stephen Grider's NextJS: The Complete Developer's Guide course on Udemy in which we built a simple Reddit-clone with ability to create topics, posts, and comments. I decided to expand on the base project to develop a personal discussion forum and added ability to delete topics, posts, and comments as well.
+
+As of June 2026, I have been working on implementing tests through React Testing Library and Jest.
 
 ------------
 
