@@ -1,6 +1,13 @@
 # Test Writing Process
 
-- Current File Being Tested: header-auth.tsx
+File Being Tested: search-input.tsx
+
+- What are the important parts of the component/what am I testing?
+  - When a term is searched, the term (now in the URL) should pre-populate in the search input.
+  - When there is no term being searched, the input should not have anything rendered.
+
+File Being Tested: header-auth.tsx
+
 - What are the important parts of the component/what am I testing?
   - If a session/user is not authenticated:
     [ x ] Render the sign in and sign up buttons
