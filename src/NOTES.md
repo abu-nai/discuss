@@ -15,3 +15,8 @@ File Being Tested: header-auth.tsx
     [ x ] Do not show the sign in and sign up buttons
     [ x ] Render the user's avatar
     [ x ] Render sign out button
+
+File Being Tested: comment-create-form.tsx
+
+- What are the important parts of the component/what am I testing?
+  - Clicking the reply button will toggle the comment form open and closed
