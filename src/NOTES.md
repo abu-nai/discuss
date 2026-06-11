@@ -25,3 +25,8 @@ File Being Tested: post-create-form.tsx
 
 - What are the important parts of the component/what am I testing?
   - Clicking the Create Post button will toggle the form open and closed
+
+File Being Tested: post-list.tsx
+
+- What are the important parts of the component/what am I testing?
+  - That the post will render the title, author, and number of comments in each listing
