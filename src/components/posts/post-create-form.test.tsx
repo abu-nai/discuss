@@ -23,18 +23,31 @@ jest.mock('react', () => ({
   useActionState: jest.fn(() => [{ errors: {} }, jest.fn(), false]),
 }));
 
-test('clicking on "create post" button toggles creation form open and closed', () => {
+test('clicking on "create post" button toggles creation form open and closed', async () => {
     const user = userEvent.setup();
-    render(<PostCreateForm slug={} />);
+    render(<PostCreateForm slug="test-topic" />);
 
     // assertion that the form is NOT present at the start
+    // because PostCreateForm uses a Popover, we check for a field INSIDE the form, not the form itself
+    expect(screen.queryByPlaceholderText(/title/i))
+        .not
+        .toBeInTheDocument();
 
     // user click
+    const formButton = screen.getByRole('button', {
+        name: /create post/i
+    });
+    await user.click(formButton);
 
     // assertion that the form IS present
+    expect(screen.queryByPlaceholderText(/title/i)).toBeInTheDocument();
 
     // user click 
+    await user.click(formButton);
 
     // assertion that the form is NOT present
+    expect(screen.queryByPlaceholderText(/title/i))
+        .not
+        .toBeInTheDocument();
 
 });
