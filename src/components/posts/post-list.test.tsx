@@ -1,19 +1,46 @@
 import { render, screen } from '@testing-library/react';
 import PostList from './post-list';
+import type { PostWithData } from '@/db/queries/posts';
 
-test('postlist will display post title, author, and number of comments', () => {
-    render(<PostList fetchData={() => {
-        return (Promise<[
-            {
-                topic: { slug: "test-slug" },
-                user: { name: "pluto" },
-                _count: { comments: 4 }
-            }]
-        >)
-    }
-    }/>);
+test('postlist will display post title, author, and number of comments', async () => {
+    // Provide controlled data:
+    const mockPosts: PostWithData[] = [
+        {
+            id: '1',
+            title: 'First Test Post',
+            content: 'Testing, testing, 1, 2, 3',
+            userId: '1',
+            topicId: 'testing',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            topic: { slug: 'rehearsal' },
+            user: { name: 'Pluto' },
+            _count: { comments: 10 },
+        },
+        {
+            id: '2',
+            title: 'Second Test Post',
+            content: 'Is this thing even on?',
+            userId: '2',
+            topicId: 'testing',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            topic: { slug: 'rehearsal' },
+            user: { name: 'Fern' },
+            _count: { comments: 6 },
+        },
+    ];
 
-    
+    // Isolate PostList's awaited output and render directly since PostList is an async Server Component.
+    const Component = await PostList({ fetchData: async () => mockPosts as PostWithData[]});
+
+    render(Component);
+
+    expect(screen.getByText('First Test Post')).toBeInTheDocument();
+    expect(screen.getByText('Second Test Post')).toBeInTheDocument();
+    expect(screen.getByText(/by pluto/i)).toBeInTheDocument();
+    expect(screen.getByText(/by fern/i)).toBeInTheDocument();
+    expect(screen.getByText(/10 comments/i)).toBeInTheDocument();
 
 
 });
