@@ -30,3 +30,9 @@ File Being Tested: post-list.tsx
 
 - What are the important parts of the component/what am I testing?
   - That the post will render the title, author, and number of comments in each listing
+
+File Being Tested: topic-create-form.tsx
+
+- What are the important parts of the component/what am I testing?
+  - Clicking the "Create Topic" button toggles the form open and closed with name, description, and save button
+  - The \_form error banner is not present upon initial render
